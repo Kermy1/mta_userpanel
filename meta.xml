@@ -1,0 +1,162 @@
+<meta>
+	<info author="Kermy" name="userpanel" version="1.0" addon="race"/>	
+	<script src="oop.lua" type="client" />
+	<!--resources-->
+	<!--DXGUI-->
+	<script src="Resources/dxgui/DXGUIElement.lua" type="client" />	
+	<script src="Resources/dxgui/DXGUIWindow.lua" type="client" />
+	<script src="Resources/dxgui/DXGUILabel.lua" type="client" />
+	
+	
+	<!--view-->
+	
+	
+	
+	<!--model-->
+	<script src="Model/ClientUtil.lua" type="client" />
+	
+	
+	<!--controller-->
+	
+	
+	
+	
+	
+	
+	<script src="ClientInit.lua" type="client" />	
+	<script src="ServerInit.lua" type="server" />
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--infernus models-->
+	<!--TODO:-->
+	
+	<!--wheels-->
+	<!--
+	<script src="wheels/wheels.lua" type="client"/>
+	<config src="wheels/wheels.xml" type="client"/>
+	<file src="wheels/J2_wheels.txd" />
+	<file src="wheels/wheel_gn1.dff" />
+	<file src="wheels/wheel_gn2.dff" />
+	<file src="wheels/wheel_gn3.dff" />
+	<file src="wheels/wheel_gn4.dff" />
+	<file src="wheels/wheel_gn5.dff" />
+	<file src="wheels/wheel_lr1.dff" />
+	<file src="wheels/wheel_lr2.dff" />
+	<file src="wheels/wheel_lr3.dff" />
+	<file src="wheels/wheel_lr4.dff" />
+	<file src="wheels/wheel_lr5.dff" />
+	<file src="wheels/wheel_or1.dff" />
+	<file src="wheels/wheel_sr1.dff" />
+	<file src="wheels/wheel_sr2.dff" />
+	<file src="wheels/wheel_sr3.dff" />
+	<file src="wheels/wheel_sr4.dff" />
+	<file src="wheels/wheel_sr5.dff" />
+	<file src="wheels/wheel_sr6.dff" />
+	
+	<!--lights-->
+	<!--<script src="lights/lights.lua" type="client" />
+	<config src="lights/lights.xml" type="client"/>
+	<file src="lights/images/Blue Doom.jpg" />
+	<file src="lights/images/Blue Estrellas.jpg" />
+	<file src="lights/images/Blue Flecha.jpg" />
+	<file src="lights/images/Blue Neon HQ.jpg" />
+	<file src="lights/images/Blue Oblique.jpg" />
+	<file src="lights/images/Blue X.jpg" />
+	<file src="lights/images/Colored.jpg" />
+	<file src="lights/images/Green Mustang.jpg" />
+	<file src="lights/images/Green Onda.jpg" />
+	<file src="lights/images/Green Paradise.jpg" />
+	<file src="lights/images/Grey Audi I.jpg" />
+	<file src="lights/images/High Quality.jpg" />
+	<file src="lights/images/MEME Derp HQ.jpg" />
+	<file src="lights/images/MEME Me Gusta HQ.jpg" />
+	<file src="lights/images/MEME Troll HQ.jpg" />
+	<file src="lights/images/Orange Cupido.jpg" />
+	<file src="lights/images/Orange Led.jpg" />
+	<file src="lights/images/Orange Lines.jpg" />
+	<file src="lights/images/Pink Dots.jpg" />
+	<file src="lights/images/Purple I.jpg" />
+	<file src="lights/images/Purple II.jpg" />
+	<file src="lights/images/Red Alfa Romeo.jpg" />
+	<file src="lights/images/Red Alien.jpg" />
+	<file src="lights/images/Red Angry Mouth.jpg" />
+	<file src="lights/images/Red Angry Shape.jpg" />
+	<file src="lights/images/Red Audi I.jpg" />
+	<file src="lights/images/Red Audi II.jpg" />
+	<file src="lights/images/Red Audi III.jpg" />
+	<file src="lights/images/Red BMW I.jpg" />
+	<file src="lights/images/Red BMW II.jpg" />
+	<file src="lights/images/Red BMW M5.jpg" />
+	<file src="lights/images/Red Canibus.jpg" />
+	<file src="lights/images/Red Chevrolet Malibu.jpg" />
+	<file src="lights/images/Red Citroen Survolt.jpg" />
+	<file src="lights/images/Red Cupido.jpg" />
+	<file src="lights/images/Red Curve.jpg" />
+	<file src="lights/images/Red Curves HQ.jpg" />
+	<file src="lights/images/Red Dino.jpg" />
+	<file src="lights/images/Red Double Oval.jpg" />
+	<file src="lights/images/Red Double Ring.jpg" />
+	<file src="lights/images/Red Double Ring Led.jpg" />
+	<file src="lights/images/Red Double Rounded Restangles HQ.jpg" />
+	<file src="lights/images/Red Double Stripes.jpg" />
+	<file src="lights/images/Red Fast Line.jpg" />
+	<file src="lights/images/Red FFS.jpg" />
+	<file src="lights/images/Red Infiniti Electric.jpg" />
+	<file src="lights/images/Red KIA.jpg" />
+	<file src="lights/images/Red Lamborghini.jpg" />
+	<file src="lights/images/Red Lexus.jpg" />
+	<file src="lights/images/Red Lines.jpg" />
+	<file src="lights/images/Red Metropolis.jpg" />
+	<file src="lights/images/Red Mustang.jpg" />
+	<file src="lights/images/Red Passat.jpg" />
+	<file src="lights/images/Red Peugeot.jpg" />
+	<file src="lights/images/Red Rhombus.jpg" />
+	<file src="lights/images/Red Ring.jpg" />
+	<file src="lights/images/Red Sexy.jpg" />
+	<file src="lights/images/Red Slanted Stripes.jpg" />
+	<file src="lights/images/Red Spray.jpg" />
+	<file src="lights/images/Red Subaru.jpg" />
+	<file src="lights/images/Red The N.jpg" />
+	<file src="lights/images/Red The X.jpg" />
+	<file src="lights/images/Red The Y.jpg" />
+	<file src="lights/images/Red Triangles.jpg" />
+	<file src="lights/images/Red Triple Stripes.jpg" />
+	<file src="lights/images/Red Volkswagen.jpg" />
+	<file src="lights/images/Violet Lilac.jpg" />
+	<file src="lights/images/White Slanted Stripes.jpg" />
+	<file src="lights/images/White Snake.jpg" />
+	<file src="lights/lights.fx" />
+	
+	<!--neon-->
+	<!--<script src='neon/server.lua' type='server' />
+    <script src='neon/client.lua' type='client' />
+	<config src="neon/neon.xml" type="client"/>
+    <file src='neon/models/BlueNeonTube1.dff' />
+    <file src='neon/models/GreenNeonTube1.dff' />
+    <file src='neon/models/RedNeonTube1.dff' />
+    <file src='neon/models/PinkNeonTube1.dff' />
+    <file src='neon/models/YellowNeonTube1.dff' />
+    <file src='neon/models/WhiteNeonTube1.dff' />
+    <file src='neon/models/BlueNeonTube1.col' />
+    <file src='neon/models/GreenNeonTube1.col' />
+    <file src='neon/models/RedNeonTube1.col' />
+    <file src='neon/models/PinkNeonTube1.col' />
+    <file src='neon/models/YellowNeonTube1.col' />
+    <file src='neon/models/WhiteNeonTube1.col' />
+    <file src='neon/models/MatTextures.txd' />
+	-->
+	
+	
+	<settings> 
+		<setting name="*clanName" value="KnockOut Racers"/>
+		<setting name="*UIColour" value="#FF0000"/>
+	</settings>
+	<oop>true</oop>
+</meta>
