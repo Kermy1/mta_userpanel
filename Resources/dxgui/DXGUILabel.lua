@@ -1,7 +1,7 @@
 DXGUILabel = DXGUIElement:subclass("DXGUILabel")
 
 function DXGUILabel:init(metaName, text)
-	self.super:init(metaName)
+	self.super:init(metaName, "DXGUILabel")
 	self.text = text
 	self.fontSize = 1
 	self.clip = true
@@ -56,6 +56,7 @@ end
 
 --other functions
 function DXGUILabel:drawFrame()
+	local element = self.element
 	local position = self.position
 	local size = self.size
 	local text = self.text

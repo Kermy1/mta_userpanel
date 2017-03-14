@@ -22,7 +22,7 @@ end
 --DXGUIElement superclass
 DXGUIElement = newclass("DXGUIElement")
 
-function DXGUIElement:init(metaName)
+function DXGUIElement:init(metaName, DXGUIElementType)
 	self.metaName = metaName
 	self.position = Vector3(0,0,0)
 	self.size = Vector2(0,0)
@@ -30,6 +30,7 @@ function DXGUIElement:init(metaName)
 	self.colour = tocolor(255,255,255,255)
 	self.parent = nil
 	self.children = {}
+	self.element = createElement(DXGUIElementType, metaName) -- for event purposes
 end
 
 
@@ -91,9 +92,8 @@ end
 addEvent("OnDXGUIMouseHover")
 addEvent("OnDXGUIMouseClick")
 addEvent("OnDXGUIElementStartRendering")
-addEvent("OnDXGUIElementRendering")
+--addEvent("OnDXGUIElementRendering")
 addEvent("OnDXGUIElementStoppedRendering")
-addEvent("OnDXGUIMouseHover")
 
 
 

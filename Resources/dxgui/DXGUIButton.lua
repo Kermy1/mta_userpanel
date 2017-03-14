@@ -1,7 +1,7 @@
 DXGUIButton = DXGUIElement:subclass("DXGUIButton")
 
 function DXGUIButton:init(metaName, text)
-	self.super:init(metaName)
+	self.super:init(metaName, "DXGUIButton")
 	self.text = text
 	self.fontSize = 1
 	self.clip = true
@@ -17,8 +17,10 @@ function DXGUIButton:setVisible(visible)
 	self.visible = visible
 	if visible then
 		DXGUIElementRenderingTable[self.metaName] = self
+		triggerEvent("OnDXGUIElementStartRendering", self.element)
 	else
 		DXGUIElementRenderingTable[self.metaName] = nil
+		triggerEvent("OnDXGUIElementStoppedRendering", self.element)
 	end
 end
 function DXGUIButton:isVisible()
@@ -43,7 +45,15 @@ function DXGUILabel:drawFrame()
 	local fontSize = self.fontSize 
 	local alignX = self.alignX
 	local alignY = self.alignY
+	local element = self.element
 	
 	DxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)
 	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
+	
+	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
+		triggerEvent("OnDXGUIMouseHover", element)
+		if getKeyState("mouse1") then --click
+			triggerEvent("OnDXGUIMouseClick", element)
+		end
+	end
 end

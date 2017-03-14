@@ -17,6 +17,9 @@ function getFontSize(text, width, height)
 			return fontSize
 		else
 			tempHeight = tempHeight - 5
+			if tempHeight <= 0 then
+				return 0
+			end
 		end
 	end
 end

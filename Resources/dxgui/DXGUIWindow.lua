@@ -1,7 +1,7 @@
 DXGUIWindow = DXGUIElement:subclass("DXGUIWindow")
 
 function DXGUIWindow:init(metaName, title, iconFilePath)
-	self.super:init(metaName)
+	self.super:init(metaName, "DXGUIWindow")
 	self.collapseAble = false
 	self.closeAble = false
 	self.collapsed = false
@@ -69,6 +69,7 @@ end
 
 --other functions
 function DXGUIWindow:drawFrame()
+	local element = self.element
 	local collapsed = self.collapsed
 	local position = self.position
 	local size = self.size
