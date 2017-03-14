@@ -53,7 +53,7 @@ function DXGUILabel:drawFrame()
 	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
 		triggerEvent("OnDXGUIMouseHover", element)
 		if getKeyState("mouse1") then --click
-			triggerEvent("OnDXGUIMouseClick", element)
+			triggerEvent("OnDXGUIMouseClickBounce", element)
 		end
 	end
 end

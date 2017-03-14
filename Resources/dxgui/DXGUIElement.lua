@@ -17,6 +17,23 @@ function addChildToClass(parent, child)
 	parent:addChild(child)
 end
 
+--"OnDXGUIMouseClickBounce" triggers every frame the user holds down the lmouse button while on the GUI element
+clickBounceTable = {} --table to support multiple GUI elements to be clicked at the same time (not sure if overkill)
+bounceTimerTable = {} --table to support multiple GUI elements to be clicked at the same time (not sure if overkill)
+function clickBounceRemover()
+	if clickBounceTable[getElementID(source)] == nil then --is element already clicked in the last quarter second
+		clickBounceTable[getElementID(source)] = source
+		local bounceTimer = setTimer(removeFromBounceTable, 250, 1, source)
+		bounceTimerTable[getElementID(source)] = bounceTimer
+		triggerEvent("OnDXGUIMouseClick", source)
+	else
+		resetTimer(bounceTimerTable[getElementID(source)])
+	end
+end
+addEventHandler("OnDXGUIMouseClickBounce", getRootElement(), clickBounceRemover)
+function removeFromBounceTable(element)
+	clickBounceTable[getElementID(element)] = nil
+end
 
 
 --DXGUIElement superclass
@@ -90,7 +107,8 @@ end
 
 --events
 addEvent("OnDXGUIMouseHover")
-addEvent("OnDXGUIMouseClick")
+addEvent("OnDXGUIMouseClick") --after bounce remove
+addEvent("OnDXGUIMouseClickBounce") --before bounce remove
 addEvent("OnDXGUIElementStartRendering")
 --addEvent("OnDXGUIElementRendering")
 addEvent("OnDXGUIElementStoppedRendering")
