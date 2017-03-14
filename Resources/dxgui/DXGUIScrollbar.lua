@@ -1,12 +1,12 @@
-DXGUICheckBox = DXGUIElement:subclass("DXGUICheckBox")
+DXGUIScrollbar = DXGUIElement:subclass("DXGUIScrollbar")
 
-function DXGUICheckBox:init(metaName, text)
-	self.super:init(metaName, "DXGUICheckBox")
+function DXGUIScrollbar:init(metaName, text)
+	self.super:init(metaName, "DXGUIScrollbar")
 end
 
 
 --getters/setters
-function DXGUICheckBox:setVisible(visible)
+function DXGUIScrollbar:setVisible(visible)
 	self.visible = visible
 	if visible then
 		DXGUIElementRenderingTable[self.metaName] = self
@@ -14,13 +14,13 @@ function DXGUICheckBox:setVisible(visible)
 		DXGUIElementRenderingTable[self.metaName] = nil
 	end
 end
-function DXGUICheckBox:isVisible()
+function DXGUIScrollbar:isVisible()
 	return self.visible
 end
 
 
 --other functions
-function DXGUICheckBox:drawFrame()
+function DXGUIScrollbar:drawFrame()
 	local position = self.position
 	local size = self.size
 	local text = self.text

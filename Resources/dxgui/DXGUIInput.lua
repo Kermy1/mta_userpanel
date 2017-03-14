@@ -1,12 +1,19 @@
-DXGUICheckBox = DXGUIElement:subclass("DXGUICheckBox")
+DXGUIInput = DXGUIElement:subclass("DXGUIInput")
 
-function DXGUICheckBox:init(metaName, text)
-	self.super:init(metaName, "DXGUICheckBox")
+function DXGUIInput:init(metaName, text)
+	self.super:init(metaName, "DXGUIInput")
+	self.text = text
+	self.fontSize = 1
+	self.clip = true
+	self.wordBreak = false
+	self.font = "default"
+	self.alignX = "left"
+	self.alignY = "center"
 end
 
 
 --getters/setters
-function DXGUICheckBox:setVisible(visible)
+function DXGUIInput:setVisible(visible)
 	self.visible = visible
 	if visible then
 		DXGUIElementRenderingTable[self.metaName] = self
@@ -14,13 +21,22 @@ function DXGUICheckBox:setVisible(visible)
 		DXGUIElementRenderingTable[self.metaName] = nil
 	end
 end
-function DXGUICheckBox:isVisible()
+function DXGUIInput:isVisible()
 	return self.visible
 end
 
+function DXGUIInput:setText(text)
+	self.text = text
+end
+function DXGUIInput:getText()
+	return self.text
+end
+
+
 
 --other functions
-function DXGUICheckBox:drawFrame()
+function DXGUIInput:drawFrame()
+	local element = self.element
 	local position = self.position
 	local size = self.size
 	local text = self.text

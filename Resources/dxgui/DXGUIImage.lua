@@ -1,19 +1,12 @@
-DXGUILabel = DXGUIElement:subclass("DXGUILabel")
+DXGUIImage = DXGUIElement:subclass("DXGUIImage")
 
-function DXGUILabel:init(metaName, text)
-	self.super:init(metaName, "DXGUILabel")
-	self.text = text
-	self.fontSize = 1
-	self.clip = true
-	self.wordBreak = false
-	self.font = "default"
-	self.alignX = "center"
-	self.alignY = "center"
+function DXGUIImage:init(metaName, text)
+	self.super:init(metaName, "DXGUIImage")
 end
 
 
 --getters/setters
-function DXGUILabel:setVisible(visible)
+function DXGUIImage:setVisible(visible)
 	self.visible = visible
 	if visible then
 		DXGUIElementRenderingTable[self.metaName] = self
@@ -21,41 +14,13 @@ function DXGUILabel:setVisible(visible)
 		DXGUIElementRenderingTable[self.metaName] = nil
 	end
 end
-function DXGUILabel:isVisible()
+function DXGUIImage:isVisible()
 	return self.visible
 end
 
-function DXGUILabel:setText(text)
-	self.text = text
-end
-function DXGUILabel:getText()
-	return self.text
-end
-
-function DXGUILabel:setClip(clip)
-	self.clip = clip
-end
-
-function DXGUILabel:setWordBreak(wordBreak)
-	self.wordBreak = wordBreak
-end
-
-function DXGUILabel:setFont(font)
-	self.font = font
-end
-
-function DXGUILabel:setFontSize(fontSize)
-	if fontSize == "auto" then
-		self.fontSize = getFontSize(self.text, self.size.x, self.size.y)
-	else
-		self.fontSize = fontSize
-	end
-end
-
-
 
 --other functions
-function DXGUILabel:drawFrame()
+function DXGUIImage:drawFrame()
 	local element = self.element
 	local position = self.position
 	local size = self.size

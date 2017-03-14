@@ -45,6 +45,7 @@ function DXGUIElement:init(metaName, DXGUIElementType)
 	self.size = Vector2(0,0)
 	self.visible = false
 	self.colour = tocolor(255,255,255,255)
+	self.font = "default"
 	self.parent = nil
 	self.children = {}
 	self.element = createElement(DXGUIElementType, metaName) -- for event purposes

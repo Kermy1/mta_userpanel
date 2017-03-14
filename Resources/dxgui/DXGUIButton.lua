@@ -36,7 +36,7 @@ end
 
 
 --other functions
-function DXGUILabel:drawFrame()
+function DXGUIButton:drawFrame()
 	local position = self.position
 	local size = self.size
 	local text = self.text
