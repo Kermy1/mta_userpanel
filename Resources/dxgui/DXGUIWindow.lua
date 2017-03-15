@@ -11,7 +11,7 @@ function DXGUIWindow:init(metaName, title, iconFilePath)
 	local label = DXGUILabel:new("DXGUILabel", "text")
 	label:setPosition(self.position)
 	label:setSize(self.size)
-	--label:setFontSize("auto") --TODO: infinite loop
+	label:setFontSize("auto") --TODO: infinite loop
 	label:setParent(self)
 	addChildToClass(self, label)
 end
