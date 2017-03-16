@@ -113,6 +113,7 @@ end
 
 --events
 addEvent("OnDXGUIMouseHover")
+addEvent("OnDXGUIFocus") --input class
 addEvent("OnDXGUIMouseClick") --after bounce remove
 addEvent("OnDXGUIMouseClickBounce") --before bounce remove
 addEvent("OnDXGUIElementStartRendering")

@@ -29,6 +29,7 @@ end
 
 --other functions
 function DXGUIList:drawFrame()
+	local element = self.element
 	local position = self.position
 	local size = self.size
 	local text = self.text

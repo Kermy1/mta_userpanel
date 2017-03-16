@@ -7,12 +7,12 @@ function DXGUIWindow:init(metaName, title, iconFilePath)
 	self.closeAble = false
 	self.collapsed = false
 	self.closed = false
-	self.iconFilePath = iconFilePath
+	self.iconFilePath = iconFilePath --window logo
 	self.titleBarHeight = heightScale*30
 	local label = DXGUILabel:new("DXGUILabel", "text")
 	label:setPosition(self.position)
 	label:setSize(self.size)
-	label:setFontSize("auto") --TODO: infinite loop
+	label:setFontSize("auto") --TODO: infinite loop (fixed???)
 	label:setParent(self)
 	addChildToClass(self, label)
 end
@@ -31,17 +31,17 @@ function DXGUIWindow:isVisible()
 	return self.visible
 end
 
-function DXGUIWindow:setCollapseAble(collapseAble)
+function DXGUIWindow:setCollapseAble(collapseAble) --not implemented
 	self.collapseAble = collapseAble
 end
-function DXGUIWindow:getCollapseAble()
+function DXGUIWindow:getCollapseAble() --not implemented
 	return self.collapseAble
 end
 
-function DXGUIWindow:setCloseAble(closeAble)
+function DXGUIWindow:setCloseAble(closeAble) --not implemented
 	self.closeAble = closeAble
 end
-function DXGUIWindow:getCloseAble()
+function DXGUIWindow:getCloseAble() --not implemented
 	return self.closeAble
 end
 
@@ -59,11 +59,11 @@ function DXGUIWindow:getIconFilePath()
 	return self.iconFilePath
 end
 
-function DXGUIWindow:isClosed()
+function DXGUIWindow:isClosed() --not implemented
 	return self.closed
 end
 
-function DXGUIWindow:isCollapsed()
+function DXGUIWindow:isCollapsed() --not implemented
 	return self.collapsed
 end
 
@@ -79,12 +79,19 @@ function DXGUIWindow:drawFrame()
 	local titleBarHeight = self.titleBarHeight
 	
 	DxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
+	
+	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
+		triggerEvent("OnDXGUIMouseHover", element)
+		if getKeyState("mouse1") then --click
+			triggerEvent("OnDXGUIMouseClickBounce", element)
+		end
+	end
 end
 
-function DXGUIWindow:closeWindow()
+function DXGUIWindow:closeWindow() --not implemented
 	
 end
 
-function DXGUIWindow:collapeWindow()
+function DXGUIWindow:collapeWindow() --not implemented
 	
 end

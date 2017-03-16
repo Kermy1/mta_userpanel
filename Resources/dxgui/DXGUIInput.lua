@@ -1,15 +1,32 @@
+--out of oop context--
+function handlePlayerCharacterInput(character)
+	local object = getGUIObjectFromElement(source)
+	if object:isFocused() then
+		object:setValue(object:getValue()..character)
+	end
+end
+function handlePlayerBackSpaceInput(button, press)
+	if press and button == "backspace" then
+		local object = getGUIObjectFromElement(source)
+		object:setValue(string.sub(object:getValue(), 0, -1))
+	end
+end
+
 DXGUIInput = DXGUIElement:subclass("DXGUIInput")
 
-function DXGUIInput:init(metaName, text)
+function DXGUIInput:init(metaName, value)
 	self.super:init(metaName, "DXGUIInput")
 	table.insert(DXGUIObjectTable, self)
-	self.text = text
+	self.value = value
 	self.fontSize = 1
 	self.clip = true
 	self.wordBreak = false
+	self.focused = false
 	self.font = "default"
 	self.alignX = "left"
 	self.alignY = "center"
+	addEventHandler("onClientCharacter", self.element, handlePlayerCharacterInput)
+	addEventHandler("onClientKey", self.element, handlePlayerBackSpaceInput)
 end
 
 
@@ -26,11 +43,18 @@ function DXGUIInput:isVisible()
 	return self.visible
 end
 
-function DXGUIInput:setText(text)
-	self.text = text
+function DXGUIInput:setValue(value)
+	self.value = value
 end
-function DXGUIInput:getText()
-	return self.text
+function DXGUIInput:getValue()
+	return self.value
+end
+
+function DXGUIInput:setFocused(focused)
+	self.focused = focused
+end
+function DXGUIInput:isFocused()
+	return self.focused
 end
 
 
@@ -40,13 +64,19 @@ function DXGUIInput:drawFrame()
 	local element = self.element
 	local position = self.position
 	local size = self.size
-	local text = self.text
+	local value = self.value
 	local postgui = false
 	local font = self.font 
 	local fontSize = self.fontSize 
 	local alignX = self.alignX
 	local alignY = self.alignY
 	
-	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
+	dxDrawText(value, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
 	
+	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
+		triggerEvent("OnDXGUIMouseHover", element)
+		if getKeyState("mouse1") then --click
+			triggerEvent("OnDXGUIMouseClickBounce", element)
+		end
+	end
 end
