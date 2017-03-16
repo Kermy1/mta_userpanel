@@ -2,6 +2,7 @@ DXGUIWindow = DXGUIElement:subclass("DXGUIWindow")
 
 function DXGUIWindow:init(metaName, title, iconFilePath)
 	self.super:init(metaName, "DXGUIWindow")
+	table.insert(DXGUIObjectTable, self)
 	self.collapseAble = false
 	self.closeAble = false
 	self.collapsed = false

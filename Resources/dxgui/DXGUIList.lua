@@ -2,6 +2,7 @@ DXGUIList = DXGUIElement:subclass("DXGUIList")
 
 function DXGUIList:init(metaName, text)
 	self.super:init(metaName, "DXGUIList")
+	table.insert(DXGUIObjectTable, self)
 	self.text = text
 	self.fontSize = 1
 	self.clip = true

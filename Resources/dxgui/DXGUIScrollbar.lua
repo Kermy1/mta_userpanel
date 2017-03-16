@@ -2,6 +2,7 @@ DXGUIScrollbar = DXGUIElement:subclass("DXGUIScrollbar")
 
 function DXGUIScrollbar:init(metaName, text)
 	self.super:init(metaName, "DXGUIScrollbar")
+	table.insert(DXGUIObjectTable, self)
 end
 
 

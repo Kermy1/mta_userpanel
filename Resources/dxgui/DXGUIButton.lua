@@ -2,6 +2,7 @@ DXGUIButton = DXGUIElement:subclass("DXGUIButton")
 
 function DXGUIButton:init(metaName, text)
 	self.super:init(metaName, "DXGUIButton")
+	table.insert(DXGUIObjectTable, self)
 	self.text = text
 	self.fontSize = 1
 	self.clip = true

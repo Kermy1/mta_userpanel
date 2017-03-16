@@ -2,6 +2,7 @@ DXGUILabel = DXGUIElement:subclass("DXGUILabel")
 
 function DXGUILabel:init(metaName, text)
 	self.super:init(metaName, "DXGUILabel")
+	table.insert(DXGUIObjectTable, self)
 	self.text = text
 	self.fontSize = 1
 	self.clip = true

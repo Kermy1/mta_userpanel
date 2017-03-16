@@ -2,6 +2,7 @@ DXGUICheckBox = DXGUIElement:subclass("DXGUICheckBox")
 
 function DXGUICheckBox:init(metaName, text)
 	self.super:init(metaName, "DXGUICheckBox")
+	table.insert(DXGUIObjectTable, self)
 end
 
 

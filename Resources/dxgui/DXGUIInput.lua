@@ -2,6 +2,7 @@ DXGUIInput = DXGUIElement:subclass("DXGUIInput")
 
 function DXGUIInput:init(metaName, text)
 	self.super:init(metaName, "DXGUIInput")
+	table.insert(DXGUIObjectTable, self)
 	self.text = text
 	self.fontSize = 1
 	self.clip = true

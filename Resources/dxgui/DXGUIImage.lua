@@ -2,6 +2,7 @@ DXGUIImage = DXGUIElement:subclass("DXGUIImage")
 
 function DXGUIImage:init(metaName, text)
 	self.super:init(metaName, "DXGUIImage")
+	table.insert(DXGUIObjectTable, self)
 end
 
 

@@ -1,5 +1,6 @@
 --out of oop context function--
 --all GUI objects in this table will be rendered on the screen (works recursively on the children)--
+DXGUIObjectTable = {}
 DXGUIElementRenderingTable = {}
 function drawDXGUIElements(DXGUIElementsTable)
 	for key,value in pairs(DXGUIElementsTable) do
@@ -33,6 +34,10 @@ end
 addEventHandler("OnDXGUIMouseClickBounce", getRootElement(), clickBounceRemover)
 function removeFromBounceTable(element)
 	clickBounceTable[getElementID(element)] = nil
+end
+
+function getGUIObjectFromElement(element)
+	return DXGUIObjectTable[getElementID(element)]
 end
 
 
