@@ -3,7 +3,6 @@
 DXGUIElementRenderingTable = {}
 function drawDXGUIElements(DXGUIElementsTable)
 	for key,value in pairs(DXGUIElementsTable) do
-		outputDebugString(value:getMetaName())
 		value:drawFrame()
 		drawDXGUIElements(value:getChildren())
 	end
@@ -62,6 +61,9 @@ end
 
 function DXGUIElement:setPosition(position)
 	self.position = position
+	for child in self:getChildren() do
+		child:setPosition(position)
+	end
 end
 function DXGUIElement:getPosition()
 	return self.position
@@ -83,7 +85,7 @@ end
 
 function DXGUIElement:setParent(parent)
 	self.parent = parent
-	parent:addChild(self)
+	--parent:addChild(self)
 end
 function DXGUIElement:getParent()
 	return self.parent

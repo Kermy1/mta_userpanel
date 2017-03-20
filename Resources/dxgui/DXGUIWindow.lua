@@ -77,7 +77,7 @@ function DXGUIWindow:drawFrame()
 	local postgui = false
 	local titleBarHeight = self.titleBarHeight
 	
-	DxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
+	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
 end
 
 function DXGUIWindow:closeWindow()

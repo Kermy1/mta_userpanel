@@ -47,7 +47,7 @@ function DXGUIButton:drawFrame()
 	local alignY = self.alignY
 	local element = self.element
 	
-	DxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)
+	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)
 	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
 	
 	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover

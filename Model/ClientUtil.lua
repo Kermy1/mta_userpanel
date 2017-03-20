@@ -31,7 +31,7 @@ function dxGetFontSizeFromHeight(height, font)
     return height/ch
 end
 
-function DxDrawBorderedRectangle( x, y, width, height, color1, color2, _width, postGUI )
+function dxDrawBorderedRectangle( x, y, width, height, color1, color2, _width, postGUI )
     local _width = _width or 1
     dxDrawRectangle ( x+1, y+1, width-1, height-1, color1, postGUI )
     dxDrawLine ( x, y, x+width, y, color2, _width, postGUI ) -- Top

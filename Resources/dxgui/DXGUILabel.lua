@@ -66,6 +66,8 @@ function DXGUILabel:drawFrame()
 	local alignX = self.alignX
 	local alignY = self.alignY
 	
-	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
+	outputDebugString(size)
+	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor(255, 255, 255, 255), fontSize, font, alignX, alignY) 
+	dxDrawText('text', position.x, position.y, position.x+size.x, position.y+size.y, tocolor(255, 255, 255, 255), 5, "default", "center", "center") 
 	
 end
