@@ -30,8 +30,8 @@ end
 --other functions
 function DXGUIList:drawFrame()
 	local element = self.element
-	local position = self.position
-	local size = self.size
+	local position = self:getPosition()
+	local size = self:getSize()
 	local text = self.text
 	local postgui = false
 	local font = self.font 

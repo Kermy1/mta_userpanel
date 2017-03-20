@@ -45,8 +45,8 @@ DXGUIElement = newclass("DXGUIElement")
 
 function DXGUIElement:init(metaName, DXGUIElementType)
 	self.metaName = metaName
-	self.position = Vector3(0,0,0)
-	self.size = Vector2(0,0)
+	self.position = Vector3(0,0,0) --relative to parent
+	self.size = Vector2(0,0) --relative to parent
 	self.visible = false
 	self.colour = tocolor(255,255,255,255)
 	self.font = "default"
@@ -66,16 +66,26 @@ end
 
 function DXGUIElement:setPosition(position)
 	self.position = position
-	for child in self:getChildren() do
-		child:setPosition(position)
-	end
 end
 function DXGUIElement:getPosition()
-	return self.position
+	if self.parent != nil then --if has parent
+		local parentPos = self.parent:getPosition()
+		return vector3(parentPos.x+self.position.x, parentPos.y+self.position.y, parentPos.z+self.position.z)
+	else
+		return self.position
+	end
 end
 
 function DXGUIElement:setSize(size)
+	local ratioX = self.size.x/size.x
+	local ratioY = self.size.y/size.y
 	self.size = size
+	if #self.children > 0 then --if has children
+		for child in self.children do
+			local childSize = child:getSize
+			child:setSize(Vector2(childSize.x*ratioX, childSize.y*ratioY))
+		end
+	end
 end
 function DXGUIElement:getSize()
 	return self.size
@@ -90,7 +100,6 @@ end
 
 function DXGUIElement:setParent(parent)
 	self.parent = parent
-	--parent:addChild(self)
 end
 function DXGUIElement:getParent()
 	return self.parent

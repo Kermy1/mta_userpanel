@@ -62,8 +62,8 @@ end
 --other functions
 function DXGUIInput:drawFrame()
 	local element = self.element
-	local position = self.position
-	local size = self.size
+	local position = self:getPosition()
+	local size = self:getSize()
 	local value = self.value
 	local postgui = false
 	local font = self.font 

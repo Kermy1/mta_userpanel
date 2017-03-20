@@ -72,16 +72,13 @@ end
 function DXGUIWindow:drawFrame()
 	local element = self.element
 	local collapsed = self.collapsed
-	local position = self.position
-	local size = self.size
+	local position = self:getPosition()
+	local size = self:getSize()
 	local colour = self.colour
 	local postgui = false
 	local titleBarHeight = self.titleBarHeight
 	
-<<<<<<< HEAD
 	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
-=======
-	DxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
 	
 	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
 		triggerEvent("OnDXGUIMouseHover", element)
@@ -89,7 +86,6 @@ function DXGUIWindow:drawFrame()
 			triggerEvent("OnDXGUIMouseClickBounce", element)
 		end
 	end
->>>>>>> d3e074b5194d737ede5f7134517ef7a602fd2553
 end
 
 function DXGUIWindow:closeWindow() --not implemented
