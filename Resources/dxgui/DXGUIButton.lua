@@ -2,6 +2,7 @@ DXGUIButton = DXGUIElement:subclass("DXGUIButton")
 
 function DXGUIButton:init(metaName, text)
 	self.super:init(metaName, "DXGUIButton")
+	table.insert(DXGUIObjectTable, self)
 	self.text = text
 	self.fontSize = 1
 	self.clip = true
@@ -37,6 +38,7 @@ end
 
 --other functions
 function DXGUIButton:drawFrame()
+	local element = self.element
 	local position = self.position
 	local size = self.size
 	local text = self.text
@@ -45,7 +47,6 @@ function DXGUIButton:drawFrame()
 	local fontSize = self.fontSize 
 	local alignX = self.alignX
 	local alignY = self.alignY
-	local element = self.element
 	
 	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)
 	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 

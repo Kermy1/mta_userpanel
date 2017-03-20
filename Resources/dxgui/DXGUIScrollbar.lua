@@ -2,6 +2,7 @@ DXGUIScrollbar = DXGUIElement:subclass("DXGUIScrollbar")
 
 function DXGUIScrollbar:init(metaName, text)
 	self.super:init(metaName, "DXGUIScrollbar")
+	table.insert(DXGUIObjectTable, self)
 end
 
 
@@ -21,6 +22,7 @@ end
 
 --other functions
 function DXGUIScrollbar:drawFrame()
+	local element = self.element
 	local position = self.position
 	local size = self.size
 	local text = self.text
