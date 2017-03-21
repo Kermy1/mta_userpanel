@@ -6,7 +6,62 @@ widthScale = screenWidth/1920
 
 localPlayer = getLocalPlayer()
 
+function Vector2:compare( comparison, precision )
+	assert( type( comparison.getLength ) == 'function', "First argument must be a Vector2." )
+	assert( not precision or type( precision ) == 'number', "Precision type must be a number, got " .. type( precision ) .. "." )
+	if ( not precision ) then
+		if ( self:getX( ) ~= comparison:getX( ) ) or
+		   ( self:getY( ) ~= comparison:getY( ) ) then
+			return false
+		end
+	else
+		if ( math.abs( self:getX( ) - comparison:getX( ) ) > precision ) or
+		   ( math.abs( self:getY( ) - comparison:getY( ) ) > precision ) then
+			return false
+		end
+	end
+	return true
+end
 
+function Vector3:compare( comparison, precision )
+	assert( type( comparison.getLength ) == 'function', "First argument must be a Vector3." )
+	assert( not precision or type( precision ) == 'number', "Precision type must be a number, got " .. type( precision ) .. "." )
+	if ( not precision ) then
+		if ( self:getX( ) ~= comparison:getX( ) ) or
+		   ( self:getY( ) ~= comparison:getY( ) ) or
+		   ( self:getZ( ) ~= comparison:getZ( ) ) then
+			return false
+		end
+	else
+		if ( math.abs( self:getX( ) - comparison:getX( ) ) > precision ) or
+		   ( math.abs( self:getY( ) - comparison:getY( ) ) > precision ) or
+		   ( math.abs( self:getZ( ) - comparison:getZ( ) ) > precision ) then
+			return false
+		end
+	end
+	return true
+end
+
+function Vector4:compare( comparison, precision )
+	assert( type( comparison.getLength ) == 'function', "First argument must be a Vector4." )
+	assert( not precision or type( precision ) == 'number', "Precision type must be a number, got " .. type( precision ) .. "." )
+	if ( not precision ) then
+		if ( self:getX( ) ~= comparison:getX( ) ) or
+		   ( self:getY( ) ~= comparison:getY( ) ) or
+		   ( self:getZ( ) ~= comparison:getZ( ) ) or
+		   ( self:getW( ) ~= comparison:getW( ) ) then
+			return false
+		end
+	else
+		if ( math.abs( self:getX( ) - comparison:getX( ) ) > precision ) or
+		   ( math.abs( self:getY( ) - comparison:getY( ) ) > precision ) or
+		   ( math.abs( self:getZ( ) - comparison:getZ( ) ) > precision ) or
+		   ( math.abs( self:getW( ) - comparison:getW( ) ) > precision ) then
+			return false
+		end
+	end
+	return true
+end
 
 function getFontSize(text, width, height)
 	local bool = true

@@ -17,6 +17,25 @@ function addChildToClass(parent, child)
 	parent:addChild(child)
 end
 
+function animateDXGUIElement()
+	GUIObject = getGUIObjectFromElement(source)
+	local pos = GUIObject:getPosition()
+	local size = GUIObject:getSize()
+	local colour = GUIObject:getColour()
+	local animPos = GUIObject:getAnimPosition()
+	local animSize = GUIObject:getAnimSize()
+	local animColour = GUIObject:getAnimColour()
+	local animPosInc = GUIObject:getAnimPositionInc()
+	local animSizeInc = GUIObject:getAnimSizeInc()
+	local animColourInc = GUIObject:getAnimColourInc()
+	
+	--TODO: change pos,size,colour
+	
+	if pos:compare(animePos) and size:compare(animeSize) and colour:compare(animColour) then --animation finished
+		GUIObject:stopAnimation()
+	end
+end
+
 --"OnDXGUIMouseClickBounce" triggers every frame the user holds down the lmouse button while on the GUI element
 clickBounceTable = {} --table to support multiple GUI elements to be clicked at the same time (not sure if overkill)
 bounceTimerTable = {} --table to support multiple GUI elements to be clicked at the same time (not sure if overkill)
@@ -46,11 +65,18 @@ DXGUIElement = newclass("DXGUIElement")
 function DXGUIElement:init(metaName, DXGUIElementType)
 	self.metaName = metaName
 	self.position = Vector3(0,0,0) --relative to parent
+	self.animPosition = Vector3(0,0,0) --position the animation will go to
+	self.animPositionInc = Vector3(0,0,0) --position the animation will change every frame
 	self.size = Vector2(0,0) --relative to parent
+	self.animSize = Vector2(0,0) --size the animation will go to
+	self.animSizeInc = Vector2(0,0) --size the animation will change every frame
 	self.visible = false
-	self.colour = tocolor(255,255,255,255)
+	self.colour = Vector4(0,0,0,0)
+	self.animColour = Vector4(0,0,0,0)
+	self.animColourInc = Vector4(0,0,0,0)
 	self.font = "default"
 	self.parent = nil
+	self.animation = false
 	self.children = {}
 	self.element = createElement(DXGUIElementType, metaName) -- for event purposes
 end
@@ -91,11 +117,12 @@ function DXGUIElement:getSize()
 	return self.size
 end
 
-function DXGUIElement:setColour(r,g,b,a)
-	self.colour = tocolor(r,g,b,a)
+function DXGUIElement:setColour(colour)
+	self.colour = colour
 end
 function DXGUIElement:getColour()
-	return self.colour
+	local c = self.colour
+	return tocolor(c.x,c.y,c.z,c.w)
 end
 
 function DXGUIElement:setParent(parent)
@@ -105,12 +132,35 @@ function DXGUIElement:getParent()
 	return self.parent
 end
 
+function DXGUIElement:getAnimSize() --for animation purposes
+	return self.animSize
+end
+function DXGUIElement:getAnimPosition() --for animation purposes
+	return self.animPosition
+end
+function DXGUIElement:getAnimColour() --for animation purposes
+	return self.animColour
+end
+function DXGUIElement:getAnimSizeInc() --for animation purposes
+	return self.animSizeInc
+end
+function DXGUIElement:getAnimPositionInc() --for animation purposes
+	return self.animPositionInc
+end
+function DXGUIElement:getAnimColourInc() --for animation purposes
+	return self.animColourInc
+end
+
 function DXGUIElement:addChild(DXGUIElement)
 	table.insert(self.children, DXGUIElement)
 end
 
 function DXGUIElement:getChildren()
 	return self.children
+end
+
+function DXGUIElementIsInAnimation()
+	return self.animation
 end
 
 
@@ -122,6 +172,34 @@ function DXGUIElement:setToBack()
 	self.position = Vector3(self.position.x, self.position.y, -999999999999999)
 end
 
+function DXGUIElement:startAnimation(pos, size, colour, elapseTime)
+	self.animation = true
+	
+	self.animPosition = pos
+	--self.animPositionInc = Vector3((pos.x-self.position.x)/elapseTime,(pos.y-self.position.y)/elapseTime, 0)
+	self.animPositionInc = (pos - self.position):getNormalized()
+	
+	self.animSize = size
+	--self.animSizeInc = Vector2((size.x-self.size.x)/elapseTime,(size.y-self.size.y)/elapseTime)
+	self.animSizeInc = (size - self.size):getNormalized()
+	
+	self.animColour = colour
+	--self.animColourInc = Vector4((colour.x-self.colour.x)/elapseTime,(colour.y-self.colour.y)/elapseTime) --niet af
+	self.animColourInc = (colour - self.colour):getNormalized()
+	
+	triggerEvent("OnDXGUIElementAnimationStarted", self.element)
+	
+	--add animation handler
+	addEventHandler("onClientRender", self.element, animateDXGUIElement)
+end
+function DXGUIElement:endAnimation()
+	self.animation = false
+	triggerEvent("OnDXGUIElementAnimationEnded", self.element)
+	
+	--remove animation handler
+	removeEventHandler("onClientRender", self.element, animateDXGUIElement) --syntax correct?
+end
+
 --events
 addEvent("OnDXGUIMouseHover")
 addEvent("OnDXGUIFocus") --input class
@@ -130,6 +208,8 @@ addEvent("OnDXGUIMouseClickBounce") --before bounce remove
 addEvent("OnDXGUIElementStartRendering")
 --addEvent("OnDXGUIElementRendering")
 addEvent("OnDXGUIElementStoppedRendering")
+addEvent("OnDXGUIElementAnimationStarted")
+addEvent("OnDXGUIElementAnimationEnded")
 
 
 

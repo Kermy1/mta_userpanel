@@ -42,6 +42,7 @@ function DXGUIButton:drawFrame()
 	local position = self:getPosition()
 	local size = self:getSize()
 	local text = self.text
+	local colour = self:getColour()
 	local postgui = false
 	local font = self.font 
 	local fontSize = self.fontSize 

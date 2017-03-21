@@ -74,7 +74,7 @@ function DXGUIWindow:drawFrame()
 	local collapsed = self.collapsed
 	local position = self:getPosition()
 	local size = self:getSize()
-	local colour = self.colour
+	local colour = self:getColour()
 	local postgui = false
 	local titleBarHeight = self.titleBarHeight
 	

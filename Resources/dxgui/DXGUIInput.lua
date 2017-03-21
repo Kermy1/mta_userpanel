@@ -65,6 +65,7 @@ function DXGUIInput:drawFrame()
 	local position = self:getPosition()
 	local size = self:getSize()
 	local value = self.value
+	local colour = self:getColour()
 	local postgui = false
 	local font = self.font 
 	local fontSize = self.fontSize 
