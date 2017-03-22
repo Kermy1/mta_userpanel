@@ -43,7 +43,7 @@ function animateDXGUIElement()
 	local w,_,_ = interpolateBetween(colour.w, 0, 0, animColour.w, 0, 0, animProgress, animFunction)
 	GUIObject:setColour(Vector4(x, y, z, w))
 	
-	if pos:compare(animePos) and size:compare(animeSize) and colour:compare(animColour) then --animation finished
+	if (pos:compare(animePos) and size:compare(animeSize) and colour:compare(animColour)) or getTickCount() >= startTime+elapseTime then --animation finished
 		GUIObject:stopAnimation()
 	end
 end
