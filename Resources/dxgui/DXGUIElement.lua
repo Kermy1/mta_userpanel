@@ -21,15 +21,27 @@ function animateDXGUIElement()
 	GUIObject = getGUIObjectFromElement(source)
 	local pos = GUIObject:getPosition()
 	local size = GUIObject:getSize()
-	local colour = GUIObject:getColour()
+	local colour = GUIObject:getColourVector()
+	local animFunction = GUIObject:getAnimFunction()
 	local animPos = GUIObject:getAnimPosition()
 	local animSize = GUIObject:getAnimSize()
 	local animColour = GUIObject:getAnimColour()
-	local animPosInc = GUIObject:getAnimPositionInc()
-	local animSizeInc = GUIObject:getAnimSizeInc()
-	local animColourInc = GUIObject:getAnimColourInc()
+	local startTime = GUIObject:getAnimStartTime()
+	local elapseTime = GUIObject:getAnimElapseTime()
+	local animProgress = (getTickCount()-startTime)/elapseTime
 	
-	--TODO: change pos,size,colour
+	--change position
+	local x,y,z = interpolateBetween(pos.x, pos.y, pos.z, animePos.x, animePos.y, animePos.z, animProgress, animFunction)
+	GUIObject:setPosition(Vector3(x, y, z))
+	
+	--change size
+	local x,y,_ = interpolateBetween(size.x, size.y, 0, animSize.x, animSize.y, 0, animProgress, animFunction)
+	GUIObject:setSize(Vector2(x, y))
+	
+	--change colour
+	local x,y,z = interpolateBetween(colour.x, colour.y, colour.z, animColour.x, animColour.y, animColour.z, animProgress, animFunction)
+	local w,_,_ = interpolateBetween(colour.w, 0, 0, animColour.w, 0, 0, animProgress, animFunction)
+	GUIObject:setColour(Vector4(x, y, z, w))
 	
 	if pos:compare(animePos) and size:compare(animeSize) and colour:compare(animColour) then --animation finished
 		GUIObject:stopAnimation()
@@ -66,14 +78,14 @@ function DXGUIElement:init(metaName, DXGUIElementType)
 	self.metaName = metaName
 	self.position = Vector3(0,0,0) --relative to parent
 	self.animPosition = Vector3(0,0,0) --position the animation will go to
-	self.animPositionInc = Vector3(0,0,0) --position the animation will change every frame
 	self.size = Vector2(0,0) --relative to parent
 	self.animSize = Vector2(0,0) --size the animation will go to
-	self.animSizeInc = Vector2(0,0) --size the animation will change every frame
 	self.visible = false
 	self.colour = Vector4(0,0,0,0)
 	self.animColour = Vector4(0,0,0,0)
-	self.animColourInc = Vector4(0,0,0,0)
+	self.animElapseTime = 0 --ms
+	self.animStartTime = 0 --ms
+	self.animFunction = "Linear"
 	self.font = "default"
 	self.parent = nil
 	self.animation = false
@@ -124,6 +136,9 @@ function DXGUIElement:getColour()
 	local c = self.colour
 	return tocolor(c.x,c.y,c.z,c.w)
 end
+function DXGUIElement:getColourVector()
+	return self.colour
+end
 
 function DXGUIElement:setParent(parent)
 	self.parent = parent
@@ -141,14 +156,14 @@ end
 function DXGUIElement:getAnimColour() --for animation purposes
 	return self.animColour
 end
-function DXGUIElement:getAnimSizeInc() --for animation purposes
-	return self.animSizeInc
+function DXGUIElement:getAnimElapseTime() --for animation purposes
+	return self.animElapseTime
 end
-function DXGUIElement:getAnimPositionInc() --for animation purposes
-	return self.animPositionInc
+function DXGUIElement:getAnimStartTime() --for animation purposes
+	return self.animStartTime
 end
-function DXGUIElement:getAnimColourInc() --for animation purposes
-	return self.animColourInc
+function DXGUIElement:getAnimFunction() --for animation purposes
+	return self.animFunction
 end
 
 function DXGUIElement:addChild(DXGUIElement)
@@ -172,20 +187,14 @@ function DXGUIElement:setToBack()
 	self.position = Vector3(self.position.x, self.position.y, -999999999999999)
 end
 
-function DXGUIElement:startAnimation(pos, size, colour, elapseTime)
+function DXGUIElement:startAnimation(pos, size, colour, easeFunction, elapseTime)
 	self.animation = true
-	
 	self.animPosition = pos
-	--self.animPositionInc = Vector3((pos.x-self.position.x)/elapseTime,(pos.y-self.position.y)/elapseTime, 0)
-	self.animPositionInc = (pos - self.position):getNormalized()
-	
 	self.animSize = size
-	--self.animSizeInc = Vector2((size.x-self.size.x)/elapseTime,(size.y-self.size.y)/elapseTime)
-	self.animSizeInc = (size - self.size):getNormalized()
-	
 	self.animColour = colour
-	--self.animColourInc = Vector4((colour.x-self.colour.x)/elapseTime,(colour.y-self.colour.y)/elapseTime) --niet af
-	self.animColourInc = (colour - self.colour):getNormalized()
+	self.animFunction = easeFunction
+	self.animElapseTime = elapseTime
+	self.animStartTime = getTickCount()
 	
 	triggerEvent("OnDXGUIElementAnimationStarted", self.element)
 	
