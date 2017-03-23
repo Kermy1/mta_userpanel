@@ -1,25 +1,27 @@
-DXGUIWindow = DXGUIElement:subclass("DXGUIWindow")
+DXGUIMenuItem = DXGUIElement:subclass("DXGUIMenuItem")
 
-function DXGUIWindow:init(metaName, title, iconFilePath)
-	self.super:init(metaName, "DXGUIWindow")
+function DXGUIMenuItem:init(metaName, title, iconFilePath)
+	self.super:init(metaName, "DXGUIMenuItem")
 	table.insert(DXGUIObjectTable, self)
-	self.collapseAble = false
-	self.closeAble = false
-	self.collapsed = false
-	self.closed = false
-	self.iconFilePath = iconFilePath --window icon
-	self.titleBarHeight = heightScale*30
+	self.active = false
+	self.iconFilePath = iconFilePath --icon
+	
+	--text
 	local label = DXGUILabel:new("DXGUILabel", "text")
 	label:setPosition(self.position)
 	label:setSize(self.size)
 	label:setFontSize("auto") --TODO: infinite loop (fixed???)
 	label:setParent(self)
+	
+	--Icon
+	--TODO: icon
+	
 	addChildToClass(self, label)
 end
 
 
 --getters/setters
-function DXGUIWindow:setVisible(visible)
+function DXGUIMenuItem:setVisible(visible)
 	self.visible = visible
 	if visible then
 		DXGUIElementRenderingTable[self.metaName] = self
@@ -27,49 +29,27 @@ function DXGUIWindow:setVisible(visible)
 		DXGUIElementRenderingTable[self.metaName] = nil
 	end
 end
-function DXGUIWindow:isVisible()
+function DXGUIMenuItem:isVisible()
 	return self.visible
 end
 
-function DXGUIWindow:setCollapseAble(collapseAble) --not implemented
-	self.collapseAble = collapseAble
-end
-function DXGUIWindow:getCollapseAble() --not implemented
-	return self.collapseAble
-end
-
-function DXGUIWindow:setCloseAble(closeAble) --not implemented
-	self.closeAble = closeAble
-end
-function DXGUIWindow:getCloseAble() --not implemented
-	return self.closeAble
-end
-
-function DXGUIWindow:setTitle(title)
+function DXGUIMenuItem:setTitle(title)
 	self.title = title
 end
-function DXGUIWindow:getTitle()
+function DXGUIMenuItem:getTitle()
 	return self.title
 end
 
-function DXGUIWindow:setIconFilePath(iconFilePath)
+function DXGUIMenuItem:setIconFilePath(iconFilePath)
 	self.iconFilePath = iconFilePath
 end
-function DXGUIWindow:getIconFilePath()
+function DXGUIMenuItem:getIconFilePath()
 	return self.iconFilePath
-end
-
-function DXGUIWindow:isClosed()
-	return self.closed
-end
-
-function DXGUIWindow:isCollapsed()
-	return self.collapsed
 end
 
 
 --other functions
-function DXGUIWindow:drawFrame()
+function DXGUIMenuItem:drawFrame()
 	local element = self.element
 	local collapsed = self.collapsed
 	local position = self:getPosition()
@@ -77,8 +57,6 @@ function DXGUIWindow:drawFrame()
 	local colour = self:getColour()
 	local postgui = false
 	local titleBarHeight = self.titleBarHeight
-	
-	--rounded corners?
 	
 	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
 	
