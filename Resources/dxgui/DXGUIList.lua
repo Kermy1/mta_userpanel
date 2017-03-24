@@ -42,4 +42,5 @@ function DXGUIList:drawFrame()
 	
 	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
 	
+	self:triggerEvents()
 end

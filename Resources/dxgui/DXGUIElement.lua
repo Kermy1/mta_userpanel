@@ -88,6 +88,7 @@ function DXGUIElement:init(metaName, DXGUIElementType)
 	self.animFunction = "Linear"
 	self.font = "default"
 	self.parent = nil
+	self.mouseHover = false
 	self.animation = false
 	self.children = {}
 	self.element = createElement(DXGUIElementType, metaName) -- for event purposes
@@ -147,6 +148,13 @@ function DXGUIElement:getParent()
 	return self.parent
 end
 
+function DXGUIElement:getMouseHover()
+	return self.mouseHover
+end
+function DXGUIElement:setMouseHover(bool)
+	self.mouseHover = bool
+end
+
 function DXGUIElement:getAnimSize() --for animation purposes
 	return self.animSize
 end
@@ -187,6 +195,30 @@ function DXGUIElement:setToBack()
 	self.position = Vector3(self.position.x, self.position.y, -999999999999999)
 end
 
+function DXGUIElement:triggerEvents()
+	local element = self.element
+	local position = self:getPosition()
+	local size = self:getSize()
+	
+	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
+		triggerEvent("OnDXGUIMouseHover", element)
+		
+		if !self:getMouseHover() then
+			self:setMouseHover(true)
+			triggerEvent("OnDXGUIMouseEnter", element)
+		end
+		
+		if getKeyState("mouse1") then --click
+			triggerEvent("OnDXGUIMouseClickBounce", element)
+		end
+	else
+		if self:getMouseHover() then
+			self:setMouseHover(false)
+			triggerEvent("OnDXGUIMouseLeave", element)
+		end
+	end
+end
+
 function DXGUIElement:startAnimation(pos, size, colour, easeFunction, elapseTime)
 	self.animation = true
 	self.animPosition = pos
@@ -211,6 +243,8 @@ end
 
 --events
 addEvent("OnDXGUIMouseHover")
+addEvent("OnDXGUIMouseEnter")
+addEvent("OnDXGUIMouseLeave")
 addEvent("OnDXGUIFocus") --input class
 addEvent("OnDXGUIMouseClick") --after bounce remove
 addEvent("OnDXGUIMouseClickBounce") --before bounce remove

@@ -72,10 +72,5 @@ function DXGUILabel:drawFrame()
 	dxDrawText(text, position.x, position.y, position.x+size.x, position.y+size.y, tocolor(255, 255, 255, 255), fontSize, font, alignX, alignY) 
 	dxDrawText('text', position.x, position.y, position.x+size.x, position.y+size.y, tocolor(255, 255, 255, 255), 5, "default", "center", "center") 
 	
-	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
-		triggerEvent("OnDXGUIMouseHover", element)
-		if getKeyState("mouse1") then --click
-			triggerEvent("OnDXGUIMouseClickBounce", element)
-		end
-	end
+	self:triggerEvents()
 end

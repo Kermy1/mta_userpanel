@@ -74,10 +74,5 @@ function DXGUIInput:drawFrame()
 	
 	dxDrawText(value, position.x, position.y, position.x+size.x, position.y+size.y, tocolor( 255, 255, 255, 255 ), fontSize, font, alignX, alignY) 
 	
-	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
-		triggerEvent("OnDXGUIMouseHover", element)
-		if getKeyState("mouse1") then --click
-			triggerEvent("OnDXGUIMouseClickBounce", element)
-		end
-	end
+	self:triggerEvents()
 end

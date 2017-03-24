@@ -60,12 +60,7 @@ function DXGUIMenuItem:drawFrame()
 	
 	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
 	
-	if isMouseInRec(position.x, position.y, size.x, size.y) then --hover
-		triggerEvent("OnDXGUIMouseHover", element)
-		if getKeyState("mouse1") then --click
-			triggerEvent("OnDXGUIMouseClickBounce", element)
-		end
-	end
+	self:triggerEvents()
 end
 
 function DXGUIWindow:closeWindow() --not implemented
