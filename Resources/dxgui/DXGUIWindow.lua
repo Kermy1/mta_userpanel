@@ -9,12 +9,21 @@ function DXGUIWindow:init(metaName, title, iconFilePath)
 	self.closed = false
 	self.iconFilePath = iconFilePath --window icon
 	self.titleBarHeight = heightScale*30
-	local label = DXGUILabel:new("DXGUILabel", "text")
+	
+	local label = DXGUILabel:new("DXGUILabel", "")
 	label:setPosition(self.position)
-	label:setSize(self.size)
+	label:setSize(Vector2(self.size.x, titleBarHeight))
+	label:setColour(Vector4(255,255,255,255))
 	label:setFontSize("auto") --TODO: infinite loop (fixed???)
 	label:setParent(self)
 	addChildToClass(self, label)
+	self.title = label
+	
+	local icon = DXGUIImage:new("DXGUIImage", "../images/icon.png")
+	label:setPosition(self.position)
+	label:setSize(self.size)
+	icon:setParent(self)
+	addChildToClass(self, icon)
 end
 
 
@@ -46,10 +55,10 @@ function DXGUIWindow:getCloseAble() --not implemented
 end
 
 function DXGUIWindow:setTitle(title)
-	self.title = title
+	self.title:setText(title)
 end
 function DXGUIWindow:getTitle()
-	return self.title
+	return self.title:getText()
 end
 
 function DXGUIWindow:setIconFilePath(iconFilePath)
@@ -80,7 +89,7 @@ function DXGUIWindow:drawFrame()
 	
 	--rounded corners?
 	
-	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, tocolor(0,0,0,200), colour, 1, postgui)	
+	dxDrawBorderedRectangle(position.x, position.y, size.x, size.y, colour, tocolor(255,255,255,255), 1, postgui)	
 	
 	self:triggerEvents()
 end

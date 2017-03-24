@@ -1,8 +1,9 @@
 DXGUIImage = DXGUIElement:subclass("DXGUIImage")
 
-function DXGUIImage:init(metaName, text)
+function DXGUIImage:init(metaName, src)
 	self.super:init(metaName, "DXGUIImage")
 	table.insert(DXGUIObjectTable, self)
+	self.source = src
 end
 
 

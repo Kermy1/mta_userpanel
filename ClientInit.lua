@@ -1,11 +1,14 @@
-
+local windowColour = Vector4(50, 241, 238, 82)
+local windowPosition = Vector3(screenWidth/2-500, screenHeight/2-250, 0)
+local windowSize = Vector2(1000,500)
 
 addEventHandler("onClientResourceStart", getResourceRootElement(getThisResource()), 
 function()	
 	local window = DXGUIWindow:new("DXGUIWindow")
-	window:setPosition(Vector3(screenWidth/2-500, screenHeight/2-250, 0))
-	window:setSize(Vector2(1000,500))
-	window:setColour(Vector4(255,255,0,255))
+	window:setPosition(windowPosition)
+	window:setSize(windowSize)
+	window:setColour(windowColour)
+	window:setTitle("test")
 	window:setVisible(true)
 	
 	
