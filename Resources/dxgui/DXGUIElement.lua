@@ -1,5 +1,5 @@
 --out of oop context function--
---all GUI objects in this table will be rendered on the screen (works recursively on the children)--
+--all GUI objects in this table will be rendered on the screen (works recursively on the children)--  NOTE: Z access could be implemented by ordering this table based on position.z
 DXGUIObjectTable = {}
 DXGUIElementRenderingTable = {}
 function drawDXGUIElements(DXGUIElementsTable)
@@ -76,7 +76,7 @@ DXGUIElement = newclass("DXGUIElement")
 
 function DXGUIElement:init(metaName, DXGUIElementType)
 	self.metaName = metaName
-	self.position = Vector3(0,0,0) --relative to parent
+	self.position = Vector3(0,0,0) --relative to parent (Z access not implemented)
 	self.animPosition = Vector3(0,0,0) --position the animation will go to
 	self.size = Vector2(0,0) --relative to parent
 	self.animSize = Vector2(0,0) --size the animation will go to

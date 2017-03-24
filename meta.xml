@@ -1,23 +1,42 @@
 <meta>
 	<info author="Kermy" name="userpanel" version="1.0" addon="race"/>	
 	<script src="oop.lua" type="client" />
-	<!--resources-->
+
 	<!--DXGUI-->
 	<script src="Resources/dxgui/DXGUIElement.lua" type="client" />	
 	<script src="Resources/dxgui/DXGUIWindow.lua" type="client" />
 	<script src="Resources/dxgui/DXGUILabel.lua" type="client" />
+	<script src="Resources/dxgui/DXGUICheckBox.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIImage.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIInput.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIButton.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIList.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIScrollbar.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIDropdown.lua" type="client" />
+	<script src="Resources/dxgui/DXGUIMenuItem.lua" type="client" />
 	
 	
 	<!--view-->
-	
+	<script src="View/MainMenuView.lua" type="client" />
 	
 	
 	<!--model-->
 	<script src="Model/ClientUtil.lua" type="client" />
+	<script src="Model/ServerUtil.lua" type="server" />
 	
 	
 	<!--controller-->
-	
+	<script src="Model/MainMenuListener.lua" type="client" />
+	<script src="Model/RaceListener.lua" type="client" />
+	<script src="Model/ServerListener.lua" type="client" />
+	<script src="Model/CommandListener.lua" type="client" />
+	<script src="Model/AdminWindowListener.lua" type="client" />
+	<script src="Model/GarageWindowListener.lua" type="client" />
+	<script src="Model/MapsWindowListener.lua" type="client" />
+	<script src="Model/PlayersWindowListener.lua" type="client" />
+	<script src="Model/RankingWindowListener.lua" type="client" />
+	<script src="Model/SettingsWindowListener.lua" type="client" />
+	<script src="Model/StatsWindowListener.lua" type="client" />
 	
 	
 	
